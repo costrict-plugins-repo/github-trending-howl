@@ -1,0 +1,7 @@
+*.go
+build/
+dist/
+.sisyphus/
+
+# Internal working notes, not repo content
+.docs/

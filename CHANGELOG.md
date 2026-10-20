@@ -1,0 +1,142 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.6.0] - 2026-02-11
+
+### Added
+
+- Configurable color/behavior thresholds: 17-field `Thresholds` struct in config with `mergeThresholds()` and `validateThresholds()` (3-step clamping: type → range → pair ordering)
+- `/howl:threshold` skill for interactive threshold configuration (7 groups, view/reset, pair validation)
+- CLAUDE.md for Claude Code onboarding
+
+### Fixed
+
+- Threshold validation hardened: negative values clamped to 0, percentages capped at 100, low/high pair ordering enforced
+- 15 render functions refactored from hardcoded constants to `Thresholds` parameter (zero-value guard preserves backward compatibility)
+- `workflow_dispatch` trigger added to release.yaml (fallback for auto-release tag push event race condition)
+
+### Changed
+
+- Test coverage 95.6% → 96.1% (113 → 139 tests, +26 threshold-specific tests)
+- All documentation synced with custom thresholds feature (CLAUDE.md, README.md, skill files)
+
+## [1.5.0] - 2026-02-10
+
+### Added
+
+- Dependabot for GitHub Actions (weekly grouped updates, `chore(deps)` prefix)
+- Security Architecture section in SECURITY.md (trust model, subprocess inventory, credential handling, network egress, file system access)
+
+### Fixed
+
+- SHA-pin `upload-artifact@v4` → `v4.6.2` (last unpinned action across 9 workflows)
+- Pin `govulncheck@latest` → `v1.1.4` for reproducible security scanning
+- Add SHA256 checksum verification for Gitleaks binary download
+- Separate concurrency groups: `auto-release` vs `release` (tag-triggered Release was skipped when sharing group)
+
+### Changed
+
+- SECURITY.md overhauled: realistic SLA for single-maintainer, expanded scope (10 items), 90-day embargo policy
+- marketplace.json standardized for Anthropic Marketplace submission (kebab-case name, schema compliance)
+
+## [1.4.0] - 2026-02-10
+
+### Added
+
+- Auto-sync plugin.json version in release pipeline (jq, idempotency guard)
+- Comprehensive badge collection to README (7 → 24 badges)
+- Comprehensive test enhancement (80.2% → 95.6% coverage, 113 tests + 284 subtests)
+
+### Fixed
+
+- Enforce CGO_ENABLED=0 in Makefile build target
+- Split push in auto-release to prevent [skip ci] from blocking Release workflow
+
+### Changed
+
+- Auto-release pipeline: plugin.json version synced before tagging via jq
+- Push strategy: separate branch push ([skip ci]) and tag push for correct workflow triggering
+
+## [1.3.0] - 2026-02-10
+
+### Added
+
+- GitHub App authentication for auto-release workflow (replaces PAT)
+- Complete release setup documentation (docs/RELEASE_SETUP.md)
+
+### Changed
+
+- Auto-release now uses GitHub App tokens (1-hour auto-expiry)
+- Improved security: repository-scoped permissions, better audit trail
+
+## [1.2.0] - 2026-02-10
+
+### Added
+
+- Modular reusable workflows for CI/CD pipeline (9 workflows)
+- Security scanning: govulncheck + Gitleaks CLI + weekly audit
+- Auto-release with semantic versioning (svu)
+- Pre-commit hooks: go mod tidy + conventional commits validation
+- Comprehensive godoc comments for all exported symbols
+
+### Fixed
+
+- CI/CD workflow failures: govulncheck, gitleaks, release-build
+- Release build dependency: add test to prevent broken releases
+- Upgrade Go to 1.24.13 for TLS/x509 security patches (GO-2025-3420, GO-2025-3373)
+
+### Changed
+
+- Coverage threshold: adjusted to 75% (actual 80.2%)
+- Disable Go module cache (zero external dependencies)
+- Tests disabled in pre-commit hook (CI-only per expert panel)
+
+## [1.1.0] - 2026-02-08
+
+### Added
+
+- Support M suffix for 1M+ context window display
+- Account email display for multi-account identification
+- Claude Code plugin structure (Phase 1a)
+
+### Fixed
+
+- Migrate golangci-lint config to v2 schema
+- Upgrade golangci-lint-action v6 to v7
+
+### Changed
+
+- Code cleanup and stdlib usage improvements
+
+## [1.0.0] - 2026-02-07
+
+### Added
+
+- Core data types and stdin JSON parsing
+- Derived metrics calculations (cost velocity, cache efficiency, API wait ratio)
+- ANSI rendering with adaptive layout (2-4 lines normal, 2 lines danger mode)
+- Git status display integration
+- OAuth usage quota tracking (5h/7d)
+- Transcript parsing for tools/agents display
+- Release automation with GoReleaser and GitHub Actions
+- Comprehensive unit tests (78% coverage)
+
+### Changed
+
+- Extract magic numbers to constants
+- Remove deprecated and unused render functions
+
+[Unreleased]: https://github.com/ai-screams/howl/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/ai-screams/howl/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/ai-screams/howl/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/ai-screams/howl/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/ai-screams/howl/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/ai-screams/howl/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/ai-screams/howl/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/ai-screams/howl/releases/tag/v1.0.0

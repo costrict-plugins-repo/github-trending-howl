@@ -1,0 +1,18 @@
+{
+  "name": "howl",
+  "version": "1.11.0",
+  "description": "Your AI screams — Howl listens. Blazing-fast Go statusline HUD with adaptive layouts and per-metric control.",
+  "author": {
+    "name": "AiScream"
+  },
+  "homepage": "https://github.com/ai-screams/howl",
+  "repository": "https://github.com/ai-screams/howl",
+  "license": "MIT",
+  "keywords": [
+    "statusline",
+    "hud",
+    "metrics",
+    "performance",
+    "go"
+  ]
+}
